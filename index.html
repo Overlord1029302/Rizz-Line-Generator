@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Rizz Line Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #00bcd4, #ff9800);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            animation: backgroundAnimation 5s infinite ease-in-out;
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background: linear-gradient(135deg, #00bcd4, #ff9800);
+            }
+            50% {
+                background: linear-gradient(135deg, #ff9800, #00bcd4);
+            }
+            100% {
+                background: linear-gradient(135deg, #00bcd4, #ff9800);
+            }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            transition: transform 0.5s ease-in-out;
+            width: 300px;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #6200ea;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            background: linear-gradient(135deg, #6200ea, #3700b3);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-5px);
+            background-color: #3700b3;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+
+        .rizz-line {
+            font-size: 20px;
+            font-weight: bold;
+            color: #6200ea;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .rizz-line:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 26px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 12px 25px;
+            }
+
+            .rizz-line {
+                font-size: 18px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Rizz Line Generator</h1>
+        <button onclick="generateRizzLine()">Get Rizz Line</button>
+        <div class="rizz-line" id="rizz-line">Click the button to get a random rizz line!</div>
+    </div>
+
+    <script>
+        const rizzLines = [
+            "Are you French? Because Eiffel for you.",
+            "Is your name Google? Because you have everything I’ve been searching for.",
+            "Do you have a map? Because I keep getting lost in your eyes.",
+            "Do you believe in love at first sight, or should I walk by again?",
+            "Are you a magician? Because every time I look at you, everyone else disappears.",
+            "Are you Wi-Fi? Because I’m feeling a connection.",
+            "Do you have a Band-Aid? Because I just scraped my knee falling for you.",
+            "Is your name Chapstick? Because you’re da balm.",
+            "Are you a campfire? Because you’re hot and I’m feeling lit.",
+            "Are you a parking ticket? Because you’ve got FINE written all over you.",
+            "Is your dad a boxer? Because you’re a knockout!",
+            "Are you an angel? Because heaven is missing one.",
+            "Is your name Starbucks? Because I like you a latte.",
+            "Are you a bank loan? Because you have my interest.",
+            "Are you a time traveler? Because I can see you in my future.",
+            "Do you have a sunburn, or are you always this hot?",
+            "Are you a snowstorm? Because you’re making my heart race.",
+            "Are you a puzzle? Because I’ve been trying to figure you out all day.",
+            "Is your name Ariel? Because we mermaid for each other.",
+            "Are you a beaver? Because daaaaam.",
+            "Do you know CPR? Because you just took my breath away.",
+            "Is your name Dove? Because you’re so refreshing.",
+            "Is there an airport nearby, or is that just my heart taking off?",
+            "You must be made of copper and tellurium because you’re Cu-Te.",
+            "Do you have a pencil? Because I want to erase your past and write our future.",
+            "Are you a star? Because your beauty lights up the night.",
+            "Do you like raisins? No? How about a date?",
+            "Are you the ocean? Because I’m lost at sea.",
+            "Are you from Tennessee? Because you’re the only 10 I see.",
+            "If I were a cat, I’d spend all 9 lives with you.",
+            "Is it hot in here, or is it just you?",
+            "Can I follow you home? Cause my parents always told me to follow my dreams.",
+            "You must be a campfire, because you’re hot and I want s’more.",
+            "You’re like sunshine on a rainy day.",
+            "Are you an alien? Because your beauty is out of this world.",
+            "Is your name Pepsi? Because you’re so refreshing.",
+            "If beauty were a crime, you’d be serving a life sentence.",
+            "Is your name Tennessee? Because you’re the only 10 I see.",
+            "Are you a light bulb? Because you brighten up my day.",
+            "Are you a dictionary? Because you add meaning to my life.",
+            "Can you lend me a kiss? I promise I’ll give it back.",
+            "If kisses were snowflakes, I’d send you a blizzard.",
+            "Are you a magician? Every time I look at you, everyone else disappears.",
+            "Can you take a picture with me? I want to prove to my friends that angels are real.",
+            "Do you mind if I walk you home? My app says that we are a 99% match.",
+            "You must be a high test score because I want to take you home and show you to my mom.",
+            "Is your dad a chef? Because you’re sizzling.",
+            "You must be a parking ticket because you’ve got FINE written all over you.",
+            "I’m not a photographer, but I can picture us together.",
+            "Are you a campfire? Because you’re hot and I want s’more.",
+            "Are you a fruit, because Honeydew you know how fine you look right now?",
+            "Are you a beaver? Because daaaaam.",
+            "Can you tell me the time? Because I just lost track when I saw you.",
+            "Do you have a pencil? Because I want to erase your past and write our future.",
+            "Are you a magician? Because whenever I look at you, everyone else disappears.",
+            "Are you French? Because Eiffel for you.",
+            "I think I’ve found my missing piece, and it’s you.",
+            "Are you a ninja? Because you’re stealthily stealing my heart.",
+            "Is your name Ariel? Because we mermaid for each other.",
+            "Are you a snowstorm? Because you’re making my heart race.",
+            "Do you have a map? I keep getting lost in your eyes.",
+            "You must be made of copper and tellurium because you’re Cu-Te.",
+            "Are you a keyboard? Because you’re just my type.",
+            "Is there an airport nearby, or is that just my heart taking off?",
+            "Are you a beaver? Because daaaaam.",
+            "Are you French? Because Eiffel for you.",
+            "Yo this is very rare, because this is not a rizz line i added it for fun",
+            "You must be a magician because whenever I look at you, everyone else disappears.",
+        ];
+
+        function generateRizzLine() {
+            const randomIndex = Math.floor(Math.random() * rizzLines.length);
+            document.getElementById("rizz-line").textContent = rizzLines[randomIndex];
+        }
+    </script>
+</body>
+</html>
